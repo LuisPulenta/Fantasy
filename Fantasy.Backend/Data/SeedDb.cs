@@ -1,4 +1,5 @@
 ﻿using Fantasy.Shared.Entities;
+using Fantasy.Shared.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fantasy.Backend.Data;
@@ -6,10 +7,12 @@ namespace Fantasy.Backend.Data;
 public class SeedDb
 {
     private readonly DataContext _context;
+    private readonly IFilesHelper _filesHelper;
 
-    public SeedDb(DataContext context)
+    public SeedDb(DataContext context,IFilesHelper filesHelper)
     {
         _context = context;
+        _filesHelper = filesHelper;
     }
 
     public async Task SeedAsync()
@@ -34,17 +37,43 @@ public class SeedDb
         {
             foreach (var country in _context.Countries)
             {
-                _context.Teams.Add(new Team { Name = country.Name, Country = country! });
-                if (country.Name == "Colombia")
+                if (country.Name == "Argentina")
                 {
-                    _context.Teams.Add(new Team { Name = "Medellín", Country = country! });
-                    _context.Teams.Add(new Team { Name = "Nacional", Country = country! });
-                    _context.Teams.Add(new Team { Name = "Millonarios", Country = country! });
-                    _context.Teams.Add(new Team { Name = "Junior", Country = country! });
+                    _context.Teams.Add(new Team { Name = "Talleres", Country = country! });
+                    _context.Teams.Add(new Team { Name = "Belgrano", Country = country! });
+                    _context.Teams.Add(new Team { Name = "Instituto", Country = country! });
+                    _context.Teams.Add(new Team { Name = "River Plate", Country = country! });
+                    _context.Teams.Add(new Team { Name = "Boca Juniors", Country = country! });
                 }
+
+
+
+                var imagePath = string.Empty;
+                var filePath = $"{Environment.CurrentDirectory}\\Images\\Flags\\{country.Name}.png";
+
+                if (File.Exists(filePath))
+                {
+                    var fileBytes = File.ReadAllBytes(filePath);
+                    var stream = new MemoryStream(fileBytes);
+                    var file = $"{country.Name}.jpg";
+                    var folder = "wwwroot\\images\\teams";
+                    var fullPath = $"~/images/teams/{file}";
+                    var response = _filesHelper.UploadPhoto(stream, folder, file);
+
+                    if (response)
+                    {
+                        imagePath = fullPath;
+                    }
+                    else
+                    {
+                        imagePath = string.Empty;
+                    }
+                }
+                _context.Teams.Add(new Team { Name = country.Name, Country = country!, Image = imagePath });
             }
 
             await _context.SaveChangesAsync();
         }
     }
+
 }

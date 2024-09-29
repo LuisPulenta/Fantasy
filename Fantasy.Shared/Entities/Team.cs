@@ -17,4 +17,10 @@ public class Team
     public Country Country { get; set; } = null!;
 
     public int CountryId { get; set; }
+
+    [Display(Name = "Imagen")]
+    public string ImageFull => string.IsNullOrEmpty(Image)
+? $"https://localhost:7033/images/noimage.png"
+: $"https://localhost:7033{Image[1..]}";
+
 }
