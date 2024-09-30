@@ -1,12 +1,15 @@
 ﻿using Fantasy.Backend.UnitsOfWork.Interfaces;
 using Fantasy.Shared.DTOs;
 using Fantasy.Shared.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fantasy.Backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class CountriesController : GenericController<Country>
 {
     private readonly ICountriesUnitOfWork _countriesUnitOfWork;
