@@ -106,7 +106,7 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Authorizing… .
+        ///   Busca una cadena traducida similar a Authorizing....
         /// </summary>
         public static string Authorizing {
             get {

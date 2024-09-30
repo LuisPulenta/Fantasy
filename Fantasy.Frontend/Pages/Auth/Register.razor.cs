@@ -53,7 +53,7 @@ namespace Fantasy.Frontend.Pages.Auth
             if (responseHttp.Error)
             {
                 var message = await responseHttp.GetErrorMessageAsync();
-                Snackbar.Add(message, Severity.Error);
+                Snackbar.Add(message!, Severity.Error);
                 return;
             }
             countries = responseHttp.Response;

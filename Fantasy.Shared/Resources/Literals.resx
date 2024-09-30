@@ -262,7 +262,7 @@
     <value>Sorry, there is nothing on this route.</value>
   </data>
   <data name="Authorizing" xml:space="preserve">
-    <value>Authorizing… </value>
+    <value>Authorizing...</value>
   </data>
   <data name="NotAuthorized" xml:space="preserve">
     <value>You are not authorized to view this content...</value>
