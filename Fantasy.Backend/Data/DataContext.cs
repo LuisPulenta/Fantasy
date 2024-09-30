@@ -1,16 +1,19 @@
 ﻿using Fantasy.Shared.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fantasy.Backend.Data;
 
-public class DataContext : DbContext
+public class DataContext : IdentityDbContext<User>
 {
+    
     public DataContext(DbContextOptions<DataContext> options) : base(options)
     {
     }
 
     public DbSet<Country> Countries { get; set; }
     public DbSet<Team> Teams { get; set; }
+    
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
