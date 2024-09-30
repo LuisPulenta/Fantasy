@@ -23,12 +23,14 @@ public class User : IdentityUser
     [Display(Name = "UserType", ResourceType = typeof(Literals))]
     public UserType UserType { get; set; }
 
+    [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Literals))]
     public Country Country { get; set; } = null!;
 
     [Display(Name = "Country", ResourceType = typeof(Literals))]
     [Range(1, int.MaxValue, ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Literals))]
     public int CountryId { get; set; }
-
+        
     [Display(Name = "User", ResourceType = typeof(Literals))]
     public string FullName => $"{FirstName} {LastName}";
+
 }

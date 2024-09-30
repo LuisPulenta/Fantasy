@@ -88,6 +88,15 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Administrator Registration.
+        /// </summary>
+        public static string AdminRegister {
+            get {
+                return ResourceManager.GetString("AdminRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a All.
         /// </summary>
         public static string All {
@@ -129,6 +138,33 @@ namespace Fantasy.Shared.Resources {
         public static string Confirmation {
             get {
                 return ResourceManager.GetString("Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Thank you for confirming your email, you can now log in to the system..
+        /// </summary>
+        public static string ConfirmedEmailMessage {
+            get {
+                return ResourceManager.GetString("ConfirmedEmailMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email confirmation.
+        /// </summary>
+        public static string ConfirmEmail {
+            get {
+                return ResourceManager.GetString("ConfirmEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Press the button to confirm your account..
+        /// </summary>
+        public static string ConfirmEmailMessage {
+            get {
+                return ResourceManager.GetString("ConfirmEmailMessage", resourceCulture);
             }
         }
         
@@ -187,11 +223,29 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Edit User Profile.
+        /// </summary>
+        public static string EditUserProfile {
+            get {
+                return ResourceManager.GetString("EditUserProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Email.
         /// </summary>
         public static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email you entered already exists..
+        /// </summary>
+        public static string EmailAlreadyExists {
+            get {
+                return ResourceManager.GetString("EmailAlreadyExists", resourceCulture);
             }
         }
         
@@ -250,6 +304,24 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You have exceeded the maximum number of attempts, your account is blocked, please try again in 5 minutes..
+        /// </summary>
+        public static string ERR007 {
+            get {
+                return ResourceManager.GetString("ERR007", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The user has not been enabled, you must follow the instructions in the email sent to enable the user..
+        /// </summary>
+        public static string ERR008 {
+            get {
+                return ResourceManager.GetString("ERR008", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error.
         /// </summary>
         public static string Error {
@@ -273,6 +345,15 @@ namespace Fantasy.Shared.Resources {
         public static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hello.
+        /// </summary>
+        public static string Hello {
+            get {
+                return ResourceManager.GetString("Hello", resourceCulture);
             }
         }
         
@@ -318,6 +399,42 @@ namespace Fantasy.Shared.Resources {
         public static string LengthField {
             get {
                 return ResourceManager.GetString("LengthField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Login.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Logout.
+        /// </summary>
+        public static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to log out?.
+        /// </summary>
+        public static string LogoutConfirm {
+            get {
+                return ResourceManager.GetString("LogoutConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a If you log out, you will need to log back in to access your account..
+        /// </summary>
+        public static string LogoutMessage {
+            get {
+                return ResourceManager.GetString("LogoutMessage", resourceCulture);
             }
         }
         
@@ -394,6 +511,15 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Not a user yet? Register here.
+        /// </summary>
+        public static string NotUserYet {
+            get {
+                return ResourceManager.GetString("NotUserYet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Password.
         /// </summary>
         public static string Password {
@@ -417,6 +543,15 @@ namespace Fantasy.Shared.Resources {
         public static string PasswordConfirm {
             get {
                 return ResourceManager.GetString("PasswordConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Phone Number.
+        /// </summary>
+        public static string PhoneNumber {
+            get {
+                return ResourceManager.GetString("PhoneNumber", resourceCulture);
             }
         }
         
@@ -453,6 +588,15 @@ namespace Fantasy.Shared.Resources {
         public static string RecordSavedOk {
             get {
                 return ResourceManager.GetString("RecordSavedOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Register as new user.
+        /// </summary>
+        public static string Register {
+            get {
+                return ResourceManager.GetString("Register", resourceCulture);
             }
         }
         
@@ -511,6 +655,15 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Your account has been created successfully. An email has been sent to you with instructions on how to activate your account..
+        /// </summary>
+        public static string SendEmailConfirmationMessage {
+            get {
+                return ResourceManager.GetString("SendEmailConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Soccer Predictions App.
         /// </summary>
         public static string Subtitle {
@@ -552,6 +705,15 @@ namespace Fantasy.Shared.Resources {
         public static string User {
             get {
                 return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a User Registration.
+        /// </summary>
+        public static string UserRegister {
+            get {
+                return ResourceManager.GetString("UserRegister", resourceCulture);
             }
         }
         

@@ -14,4 +14,6 @@ public interface IRepository
 
     Task<HttpResponseWrapper<TActionResponse>> PutAsync<T, TActionResponse>(string url, T model);
 
+    Task<HttpResponseWrapper<object>> GetAsync(string url);
+
 }

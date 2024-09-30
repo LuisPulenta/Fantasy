@@ -91,4 +91,10 @@ public class Repository : IRepository
         return new HttpResponseWrapper<TActionResponse>(default, true, responseHttp);
     }
 
+    //----------------------------------------------------------------------------------------
+    public async Task<HttpResponseWrapper<object>> GetAsync(string url)
+    {
+        var responseHttp = await _httpClient.GetAsync(url);
+        return new HttpResponseWrapper<object>(null, !responseHttp.IsSuccessStatusCode, responseHttp);
+    }
 }
