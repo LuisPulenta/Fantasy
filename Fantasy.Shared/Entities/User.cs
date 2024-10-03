@@ -2,6 +2,7 @@
 using Fantasy.Shared.Enums;
 using Fantasy.Shared.Resources;
 using Microsoft.AspNetCore.Identity;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Fantasy.Shared.Entities;
 
@@ -32,5 +33,10 @@ public class User : IdentityUser
         
     [Display(Name = "User", ResourceType = typeof(Literals))]
     public string FullName => $"{FirstName} {LastName}";
+
+    [Display(Name = "Foto")]
+    public string PhotoFull => string.IsNullOrEmpty(Photo)
+? $"https://localhost:7033/images/noimage.png"
+: $"https://localhost:7033{Photo[1..]}";
 
 }

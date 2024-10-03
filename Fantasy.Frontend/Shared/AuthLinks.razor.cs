@@ -24,8 +24,10 @@ public partial class AuthLinks
         var nameClaim = claims.FirstOrDefault(x => x.Type == "UserName");
         if (photoClaim is not null)
         {
-            photoUser = photoClaim.Value;
+            //photoUser = photoClaim.Value;
+            photoUser = "https://localhost:7033" + photoClaim.Value.Substring(1);
         }
+        var a = 1;
     }
 
     private void EditAction()

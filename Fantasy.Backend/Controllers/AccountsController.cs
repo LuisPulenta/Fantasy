@@ -6,6 +6,7 @@ using Fantasy.Backend.Helpers;
 using Fantasy.Backend.UnitsOfWork.Interfaces;
 using Fantasy.Shared.DTOs;
 using Fantasy.Shared.Entities;
+using Fantasy.Shared.Helpers;
 using Fantasy.Shared.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -18,13 +19,15 @@ public class AccountsController : ControllerBase
 {
     private readonly IUsersUnitOfWork _usersUnitOfWork;
     private readonly IConfiguration _configuration;
+    private readonly IFilesHelper _filesHelper;
     private readonly IMailHelper _mailHelper;
     private readonly DataContext _context;
 
-    public AccountsController(IUsersUnitOfWork usersUnitOfWork, IConfiguration configuration, IMailHelper mailHelper, DataContext context)
+    public AccountsController(IUsersUnitOfWork usersUnitOfWork, IConfiguration configuration, IFilesHelper filesHelper, IMailHelper mailHelper, DataContext context)
     {
         _usersUnitOfWork = usersUnitOfWork;
         _configuration = configuration;
+        _filesHelper = filesHelper;
         _mailHelper = mailHelper;
         _context = context;
     }
@@ -32,13 +35,41 @@ public class AccountsController : ControllerBase
     [HttpPost("CreateUser")]
     public async Task<IActionResult> CreateUser([FromBody] UserDTO model)
     {
+        User user = model;
+
+        //Foto
+
+        if (model.Photo != null)
+        {
+            byte[] imageArray = Convert.FromBase64String(model.Photo!);
+            var stream = new MemoryStream(imageArray);
+            var guid = Guid.NewGuid().ToString();
+            var file = $"{guid}.jpg";
+            var folder = "wwwroot\\images\\users";
+            var fullPath = $"~/images/users/{file}";
+            var response = _filesHelper.UploadPhoto(stream, folder, file);
+
+            if (response)
+            {
+                user.Photo = fullPath;
+            }
+            else
+            {
+                user.Photo = string.Empty;
+            }
+        }
+        else
+        {
+            user.Photo = string.Empty;
+        }
+
+
         var country = await _context.Countries.FindAsync(model.CountryId);
         if (country == null)
         {
             return BadRequest("ERR004");
         }
 
-        User user = model;
         user.Country = country;
         var result = await _usersUnitOfWork.AddUserAsync(user, model.Password);
         if (result.Succeeded)

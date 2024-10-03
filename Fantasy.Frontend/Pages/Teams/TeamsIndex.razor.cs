@@ -103,11 +103,11 @@ public partial class TeamsIndex
                 {
                     { "Id", id }
                 };
-            dialog = DialogService.Show<CountryEdit>($"{Localizer["Edit"]} {Localizer["Team"]}", parameters, options);
+            dialog = DialogService.Show<TeamEdit>($"{Localizer["Edit"]} {Localizer["Team"]}", parameters, options);
         }
         else
         {
-            dialog = DialogService.Show<CountryCreate>($"{Localizer["New"]} {Localizer["Team"]}", options);
+            dialog = DialogService.Show<TeamCreate>($"{Localizer["New"]} {Localizer["Team"]}", options);
         }
 
         var result = await dialog.Result;
