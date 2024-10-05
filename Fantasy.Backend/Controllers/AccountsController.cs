@@ -8,6 +8,8 @@ using Fantasy.Shared.DTOs;
 using Fantasy.Shared.Entities;
 using Fantasy.Shared.Helpers;
 using Fantasy.Shared.Responses;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -32,6 +34,7 @@ public class AccountsController : ControllerBase
         _context = context;
     }
 
+    //-------------------------------------------------------------------------------------------------------
     [HttpPost("CreateUser")]
     public async Task<IActionResult> CreateUser([FromBody] UserDTO model)
     {
@@ -87,6 +90,7 @@ public class AccountsController : ControllerBase
         return BadRequest(result.Errors.FirstOrDefault());
     }
 
+    //-------------------------------------------------------------------------------------------------------
     [HttpGet("ConfirmEmail")]
     public async Task<IActionResult> ConfirmEmailAsync(string userId, string token)
     {
@@ -106,6 +110,7 @@ public class AccountsController : ControllerBase
         return NoContent();
     }
 
+    //-------------------------------------------------------------------------------------------------------
     [HttpPost("Login")]
     public async Task<IActionResult> LoginAsync([FromBody] LoginDTO model)
     {
@@ -129,6 +134,7 @@ public class AccountsController : ControllerBase
         return BadRequest("ERR006");
     }
 
+    //-------------------------------------------------------------------------------------------------------
     private TokenDTO BuildToken(User user)
     {
         var claims = new List<Claim>
@@ -158,6 +164,7 @@ public class AccountsController : ControllerBase
         };
     }
 
+    //-------------------------------------------------------------------------------------------------------
     private async Task<ActionResponse<string>> SendConfirmationEmailAsync(User user, string language)
     {
         var myToken = await _usersUnitOfWork.GenerateEmailConfirmationTokenAsync(user);
@@ -173,4 +180,115 @@ public class AccountsController : ControllerBase
         }
         return _mailHelper.SendMail(user.FullName, user.Email!, _configuration["Mail:SubjectConfirmationEn"]!, string.Format(_configuration["Mail:BodyConfirmationEn"]!, tokenLink), language);
     }
+
+    //-------------------------------------------------------------------------------------------------------
+    [HttpPost("ResedToken")]
+    public async Task<IActionResult> ResedTokenAsync([FromBody] EmailDTO model)
+    {
+        var user = await _usersUnitOfWork.GetUserAsync(model.Email);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var response = await SendConfirmationEmailAsync(user, model.Language);
+        if (response.WasSuccess)
+        {
+            return NoContent();
+        }
+
+        return BadRequest(response.Message);
+    }
+
+    //-------------------------------------------------------------------------------------------------------
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [HttpPut]
+    public async Task<IActionResult> PutAsync(User user)
+    {
+        try
+        {
+            var currentUser = await _usersUnitOfWork.GetUserAsync(User.Identity!.Name!);
+            if (currentUser == null)
+            {
+                return NotFound();
+            }
+            //Foto
+
+            if (!string.IsNullOrEmpty(user.Photo))
+            {
+                byte[] imageArray = Convert.FromBase64String(user.Photo!);
+                var stream = new MemoryStream(imageArray);
+                var guid = Guid.NewGuid().ToString();
+                var file = $"{guid}.jpg";
+                var folder = "wwwroot\\images\\users";
+                var fullPath = $"~/images/users/{file}";
+                var response = _filesHelper.UploadPhoto(stream, folder, file);
+
+                if (response)
+                {
+                    user.Photo = fullPath;
+                }
+                else
+                {
+                    user.Photo = string.Empty;
+                }
+            }
+            else
+            {
+                user.Photo = string.Empty;
+            }
+
+            currentUser.FirstName = user.FirstName;
+            currentUser.LastName = user.LastName;
+            currentUser.PhoneNumber = user.PhoneNumber;
+            currentUser.Photo = !string.IsNullOrEmpty(user.Photo) && user.Photo != currentUser.Photo ? user.Photo : currentUser.Photo;
+            currentUser.CountryId = user.CountryId;
+
+            var result = await _usersUnitOfWork.UpdateUserAsync(currentUser);
+            if (result.Succeeded)
+            {
+                return Ok(BuildToken(currentUser));
+            }
+
+            return BadRequest(result.Errors.FirstOrDefault());
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    //-------------------------------------------------------------------------------------------------------
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [HttpGet]
+    public async Task<IActionResult> GetAsync()
+    {
+        return Ok(await _usersUnitOfWork.GetUserAsync(User.Identity!.Name!));
+    }
+
+    //-------------------------------------------------------------------------------------------------------
+    [HttpPost("changePassword")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public async Task<IActionResult> ChangePasswordAsync(ChangePasswordDTO model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var user = await _usersUnitOfWork.GetUserAsync(User.Identity!.Name!);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var result = await _usersUnitOfWork.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+        if (!result.Succeeded)
+        {
+            return BadRequest(result.Errors.FirstOrDefault()!.Description);
+        }
+
+        return NoContent();
+    }
+
 }

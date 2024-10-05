@@ -47,4 +47,11 @@ public partial class Login
         await LoginService.LoginAsync(responseHttp.Response!.Token);
         NavigationManager.NavigateTo("/");
     }
+
+    private void ShowModalResendConfirmationEmail()
+    {
+        var closeOnEscapeKey = new DialogOptions() { CloseOnEscapeKey = true, CloseButton = true, MaxWidth = MaxWidth.ExtraLarge };
+        DialogService.Show<ResendConfirmationEmailToken>(Localizer["MailForwarding"], closeOnEscapeKey);
+    }
+
 }
