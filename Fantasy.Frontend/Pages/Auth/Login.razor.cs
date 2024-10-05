@@ -54,4 +54,9 @@ public partial class Login
         DialogService.Show<ResendConfirmationEmailToken>(Localizer["MailForwarding"], closeOnEscapeKey);
     }
 
+    private void ShowModalRecoverPassword()
+    {
+        var closeOnEscapeKey = new DialogOptions() { CloseOnEscapeKey = true, MaxWidth = MaxWidth.ExtraLarge };
+        DialogService.Show<RecoverPassword>(Localizer["PasswordRecovery"], closeOnEscapeKey);
+    }
 }
