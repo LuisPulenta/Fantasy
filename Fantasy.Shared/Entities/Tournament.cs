@@ -1,22 +1,24 @@
-﻿using Fantasy.Shared.Resources;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Fantasy.Shared.Resources;
 
 namespace Fantasy.Shared.Entities;
 
-public class Team
+public class Tournament
 {
     public int Id { get; set; }
 
-    [Display(Name = "Team", ResourceType = typeof(Literals))]
+    [Display(Name = "Tournament", ResourceType = typeof(Literals))]
     [MaxLength(100, ErrorMessageResourceName = "MaxLength", ErrorMessageResourceType = typeof(Literals))]
     [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Literals))]
     public string Name { get; set; } = null!;
 
     public string? Image { get; set; }
 
-    public Country Country { get; set; } = null!;
+    [Display(Name = "IsActive", ResourceType = typeof(Literals))]
+    public bool IsActive { get; set; }
 
-    public int CountryId { get; set; }
+    [Display(Name = "Remarks", ResourceType = typeof(Literals))]
+    public string? Remarks { get; set; }
 
     [Display(Name = "Imagen")]
     public string ImageFull => string.IsNullOrEmpty(Image)
@@ -25,6 +27,5 @@ public class Team
 
     public ICollection<TournamentTeam>? TournamentTeams { get; set; }
 
-    public int TournamentsCount => TournamentTeams == null ? 0 : TournamentTeams.Count;
-
+    public int TeamsCount => TournamentTeams == null ? 0 : TournamentTeams.Count;
 }
