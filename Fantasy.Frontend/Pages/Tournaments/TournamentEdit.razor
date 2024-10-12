@@ -1,0 +1,12 @@
+﻿@if (tournamentDTO is null)
+{
+    <Loading />
+}
+else
+{
+    <MudDialog>
+        <DialogContent>
+            <TournamentForm @ref="tournamentForm" TournamentDTO="tournamentDTO" OnValidSubmit="EditAsync" ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+}

@@ -28,4 +28,9 @@ public class Tournament
     public ICollection<TournamentTeam>? TournamentTeams { get; set; }
 
     public int TeamsCount => TournamentTeams == null ? 0 : TournamentTeams.Count;
+
+    public ICollection<Match>? Matches { get; set; }
+
+    public int MatchesCount => Matches == null ? 0 : Matches.Count;
+
 }

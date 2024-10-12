@@ -143,11 +143,6 @@ public class TeamsRepository : GenericRepository<Team>, ITeamsRepository
                 currentTeam.Image = string.Empty;
             }
         }
-        else
-        {
-            currentTeam.Image = string.Empty;
-        }
-
 
         currentTeam.Country = country;
         currentTeam.Name = teamDTO.Name;

@@ -79,6 +79,33 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Activate.
+        /// </summary>
+        public static string Activate {
+            get {
+                return ResourceManager.GetString("Activate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Add Team.
+        /// </summary>
+        public static string AddTeam {
+            get {
+                return ResourceManager.GetString("AddTeam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Add Team To Tournament.
+        /// </summary>
+        public static string AddTeamToTournament {
+            get {
+                return ResourceManager.GetString("AddTeamToTournament", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Admin.
         /// </summary>
         public static string Admin {
@@ -210,6 +237,24 @@ namespace Fantasy.Shared.Resources {
         public static string CurrentPassword {
             get {
                 return ResourceManager.GetString("CurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Date.
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Deactivate.
+        /// </summary>
+        public static string Deactivate {
+            get {
+                return ResourceManager.GetString("Deactivate", resourceCulture);
             }
         }
         
@@ -385,6 +430,24 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a GoalsLocal.
+        /// </summary>
+        public static string GoalsLocal {
+            get {
+                return ResourceManager.GetString("GoalsLocal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Goals Visitor.
+        /// </summary>
+        public static string GoalsVisitor {
+            get {
+                return ResourceManager.GetString("GoalsVisitor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Hello.
         /// </summary>
         public static string Hello {
@@ -444,6 +507,15 @@ namespace Fantasy.Shared.Resources {
         public static string LengthField {
             get {
                 return ResourceManager.GetString("LengthField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Local.
+        /// </summary>
+        public static string Local {
+            get {
+                return ResourceManager.GetString("Local", resourceCulture);
             }
         }
         
@@ -763,6 +835,15 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a -- Select a Team --.
+        /// </summary>
+        public static string SelectATeam {
+            get {
+                return ResourceManager.GetString("SelectATeam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Select a File….
         /// </summary>
         public static string SelectFile {
@@ -835,6 +916,24 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The tournament is active.
+        /// </summary>
+        public static string TournamentActive {
+            get {
+                return ResourceManager.GetString("TournamentActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The tournament is inactive.
+        /// </summary>
+        public static string TournamentInactive {
+            get {
+                return ResourceManager.GetString("TournamentInactive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Tournaments.
         /// </summary>
         public static string Tournaments {
@@ -876,6 +975,15 @@ namespace Fantasy.Shared.Resources {
         public static string ValidEmail {
             get {
                 return ResourceManager.GetString("ValidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Visitor.
+        /// </summary>
+        public static string Visitor {
+            get {
+                return ResourceManager.GetString("Visitor", resourceCulture);
             }
         }
         

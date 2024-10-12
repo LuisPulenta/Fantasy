@@ -20,16 +20,6 @@ public class TournamentsRepository : GenericRepository<Tournament>, ITournaments
         _filesHelper = filesHelper;
     }
 
-    //-----------------------------------------------------------------------------------------
-    public async Task<IEnumerable<Tournament>> GetComboAsync()
-    {
-        return await _context.Tournaments
-            .Where(x => x.IsActive)
-            .OrderBy(x => x.Name)
-            .ToListAsync();
-    }
-
-    //-----------------------------------------------------------------------------------------
     public async Task<ActionResponse<Tournament>> AddAsync(TournamentDTO tournamentDTO)
     {
         var tournament = new Tournament
@@ -94,7 +84,14 @@ public class TournamentsRepository : GenericRepository<Tournament>, ITournaments
         }
     }
 
-    //-----------------------------------------------------------------------------------------
+    public async Task<IEnumerable<Tournament>> GetComboAsync()
+    {
+        return await _context.Tournaments
+            .Where(x => x.IsActive)
+            .OrderBy(x => x.Name)
+            .ToListAsync();
+    }
+
     public override async Task<ActionResponse<IEnumerable<Tournament>>> GetAsync(PaginationDTO pagination)
     {
         var queryable = _context.Tournaments
@@ -117,7 +114,6 @@ public class TournamentsRepository : GenericRepository<Tournament>, ITournaments
         };
     }
 
-    //-----------------------------------------------------------------------------------------
     public override async Task<ActionResponse<Tournament>> GetAsync(int id)
     {
         var tournament = await _context.Tournaments
@@ -141,7 +137,6 @@ public class TournamentsRepository : GenericRepository<Tournament>, ITournaments
         };
     }
 
-    //-----------------------------------------------------------------------------------------
     public async Task<ActionResponse<int>> GetTotalRecordsAsync(PaginationDTO pagination)
     {
         var queryable = _context.Tournaments.AsQueryable();
@@ -159,7 +154,6 @@ public class TournamentsRepository : GenericRepository<Tournament>, ITournaments
         };
     }
 
-    //-----------------------------------------------------------------------------------------
     public async Task<ActionResponse<Tournament>> UpdateAsync(TournamentDTO tournamentDTO)
     {
         var currentTournament = await _context.Tournaments.FindAsync(tournamentDTO.Id);
@@ -168,7 +162,7 @@ public class TournamentsRepository : GenericRepository<Tournament>, ITournaments
             return new ActionResponse<Tournament>
             {
                 WasSuccess = false,
-                Message = "ERR009"
+                Message = "ERR005"
             };
         }
 

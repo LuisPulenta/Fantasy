@@ -6,13 +6,12 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 
-namespace Fantasy.Frontend.Pages.Teams;
+namespace Fantasy.Frontend.Pages.Tournaments;
 
-public partial class TeamEdit
+public partial class TournamentEdit
 {
-    private TeamDTO? teamDTO;
-    private TeamForm? teamForm;
-    private Country selectedCountry = new();
+    private TournamentDTO? tournamentDTO;
+    private TournamentForm? tournamentForm;
 
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
     [Inject] private IRepository Repository { get; set; } = null!;
@@ -23,13 +22,13 @@ public partial class TeamEdit
 
     protected override async Task OnInitializedAsync()
     {
-        var responseHttp = await Repository.GetAsync<Team>($"api/teams/{Id}");
+        var responseHttp = await Repository.GetAsync<Tournament>($"api/tournaments/{Id}");
 
         if (responseHttp.Error)
         {
             if (responseHttp.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                NavigationManager.NavigateTo("teams");
+                NavigationManager.NavigateTo("tournaments");
             }
             else
             {
@@ -39,21 +38,21 @@ public partial class TeamEdit
         }
         else
         {
-            var team = responseHttp.Response;
-            teamDTO = new TeamDTO()
+            var tournament = responseHttp.Response;
+            tournamentDTO = new TournamentDTO()
             {
-                Id = team!.Id,
-                Name = team!.Name,
-                Image = team.Image,
-                CountryId = team.CountryId
+                Id = tournament!.Id,
+                Name = tournament!.Name,
+                Image = tournament.Image,
+                IsActive = tournament!.IsActive,
+                Remarks = tournament!.Remarks,
             };
-            selectedCountry = team.Country;
         }
     }
 
     private async Task EditAsync()
     {
-        var responseHttp = await Repository.PutAsync("api/teams/full", teamDTO);
+        var responseHttp = await Repository.PutAsync("api/tournaments/full", tournamentDTO);
 
         if (responseHttp.Error)
         {
@@ -68,7 +67,7 @@ public partial class TeamEdit
 
     private void Return()
     {
-        teamForm!.FormPostedSuccessfully = true;
-        NavigationManager.NavigateTo("teams");
+        tournamentForm!.FormPostedSuccessfully = true;
+        NavigationManager.NavigateTo("tournaments");
     }
 }
