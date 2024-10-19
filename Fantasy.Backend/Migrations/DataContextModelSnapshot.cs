@@ -63,6 +63,9 @@ namespace Fantasy.Backend.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsClosed")
+                        .HasColumnType("bit");
+
                     b.Property<int>("LocalId")
                         .HasColumnType("int");
 

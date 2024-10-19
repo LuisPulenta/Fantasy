@@ -36,9 +36,13 @@ else
             <MudTh style="width: 300px;">@Localizer["Actions"]</MudTh>
         </HeaderContent>
         <RowTemplate>
-            <MudTd>@context.Name</MudTd>
             <MudTd>
-                <MudImage Src="@context.ImageFull" Width="80" />
+                <MudText Style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">
+                    @context.Name
+                </MudText>
+            </MudTd>
+            <MudTd>
+                <img src="@context.ImageFull" style="width:80px;" />
             </MudTd>
             <MudTd>
                 @if (context.IsActive)
@@ -50,7 +54,11 @@ else
                     <MudIcon Icon="@Icons.Material.Filled.Cancel" Color="Color.Error" />
                 }
             </MudTd>
-            <MudTd>@context.Remarks</MudTd>
+            <MudTd>
+                <MudText Style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 340px;">
+                    @context.Remarks
+                </MudText>
+            </MudTd>
             <MudTd>
                 <MudButton Variant="Variant.Filled"
                            EndIcon="@Icons.Material.Filled.SportsSoccer"
@@ -60,12 +68,12 @@ else
                 </MudButton>
             </MudTd>
             <MudTd>
-                @* <MudButton Variant="Variant.Filled"
+                <MudButton Variant="Variant.Filled"
                            EndIcon="@Icons.Material.Filled.Sports"
                            Color="Color.Warning"
                            OnClick="@(() => MatchesAction(@context))" style="width: 100px;">
                     @context.MatchesCount
-                </MudButton> *@
+                </MudButton>
             </MudTd>
             <MudTd>
                 <MudButton Variant="Variant.Outlined"
@@ -82,6 +90,7 @@ else
                 </MudButton>
             </MudTd>
         </RowTemplate>
+
         <NoRecordsContent>
             <MudText>@Localizer["NoRecords"]</MudText>
         </NoRecordsContent>

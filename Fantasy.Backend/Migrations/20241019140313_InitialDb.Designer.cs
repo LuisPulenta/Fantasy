@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fantasy.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240930140028_InitialDb")]
+    [Migration("20241019140313_InitialDb")]
     partial class InitialDb
     {
         /// <inheritdoc />
@@ -46,6 +46,49 @@ namespace Fantasy.Backend.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("Fantasy.Shared.Entities.Match", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("GoalsLocal")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("GoalsVisitor")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsClosed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LocalId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TournamentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VisitorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocalId");
+
+                    b.HasIndex("TournamentId");
+
+                    b.HasIndex("VisitorId");
+
+                    b.ToTable("Matches");
+                });
+
             modelBuilder.Entity("Fantasy.Shared.Entities.Team", b =>
                 {
                     b.Property<int>("Id")
@@ -71,6 +114,60 @@ namespace Fantasy.Backend.Migrations
                         .IsUnique();
 
                     b.ToTable("Teams");
+                });
+
+            modelBuilder.Entity("Fantasy.Shared.Entities.Tournament", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Tournaments");
+                });
+
+            modelBuilder.Entity("Fantasy.Shared.Entities.TournamentTeam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TournamentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
+
+                    b.HasIndex("TournamentId", "TeamId")
+                        .IsUnique();
+
+                    b.ToTable("TournamentTeams");
                 });
 
             modelBuilder.Entity("Fantasy.Shared.Entities.User", b =>
@@ -292,6 +389,33 @@ namespace Fantasy.Backend.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Fantasy.Shared.Entities.Match", b =>
+                {
+                    b.HasOne("Fantasy.Shared.Entities.Team", "Local")
+                        .WithMany()
+                        .HasForeignKey("LocalId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Fantasy.Shared.Entities.Tournament", "Tournament")
+                        .WithMany("Matches")
+                        .HasForeignKey("TournamentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Fantasy.Shared.Entities.Team", "Visitor")
+                        .WithMany()
+                        .HasForeignKey("VisitorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Local");
+
+                    b.Navigation("Tournament");
+
+                    b.Navigation("Visitor");
+                });
+
             modelBuilder.Entity("Fantasy.Shared.Entities.Team", b =>
                 {
                     b.HasOne("Fantasy.Shared.Entities.Country", "Country")
@@ -301,6 +425,25 @@ namespace Fantasy.Backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("Fantasy.Shared.Entities.TournamentTeam", b =>
+                {
+                    b.HasOne("Fantasy.Shared.Entities.Team", "Team")
+                        .WithMany("TournamentTeams")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Fantasy.Shared.Entities.Tournament", "Tournament")
+                        .WithMany("TournamentTeams")
+                        .HasForeignKey("TournamentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Team");
+
+                    b.Navigation("Tournament");
                 });
 
             modelBuilder.Entity("Fantasy.Shared.Entities.User", b =>
@@ -370,6 +513,18 @@ namespace Fantasy.Backend.Migrations
                     b.Navigation("Teams");
 
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Fantasy.Shared.Entities.Team", b =>
+                {
+                    b.Navigation("TournamentTeams");
+                });
+
+            modelBuilder.Entity("Fantasy.Shared.Entities.Tournament", b =>
+                {
+                    b.Navigation("Matches");
+
+                    b.Navigation("TournamentTeams");
                 });
 #pragma warning restore 612, 618
         }
