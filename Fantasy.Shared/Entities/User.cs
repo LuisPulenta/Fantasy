@@ -39,4 +39,12 @@ public class User : IdentityUser
 ? $"https://localhost:7033/images/noimage.png"
 : $"https://localhost:7033{Photo[1..]}";
 
+    public ICollection<Group>? GroupsManaged { get; set; }
+
+    public ICollection<UserGroup>? GroupsBelong { get; set; }
+
+    public ICollection<Prediction>? Predictions { get; set; }
+
+    public int PredictionsCount => Predictions == null ? 0 : Predictions.Count;
+
 }

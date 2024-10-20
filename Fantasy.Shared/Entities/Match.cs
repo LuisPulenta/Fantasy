@@ -43,4 +43,9 @@ public class Match
     public DateTime DateLocal => Date.ToLocalTime();
 
     public bool IsClosed { get; set; }
+
+    public ICollection<Prediction>? Predictions { get; set; }
+
+    public int PredictionsCount => Predictions == null ? 0 : Predictions.Count;
+
 }
