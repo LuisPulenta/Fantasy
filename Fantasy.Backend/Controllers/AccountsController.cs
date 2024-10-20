@@ -346,4 +346,29 @@ public class AccountsController : ControllerBase
         return _mailHelper.SendMail(user.FullName, user.Email!, _configuration["Mail:SubjectRecoveryEn"]!, string.Format(_configuration["Mail:BodyRecoveryEn"]!, tokenLink), language);
     }
 
+    //-------------------------------------------------------------------------------------------------------
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [HttpGet("paginated")]
+    public async Task<IActionResult> GetAsync([FromQuery] PaginationDTO pagination)
+    {
+        var response = await _usersUnitOfWork.GetAsync(pagination);
+        if (response.WasSuccess)
+        {
+            return Ok(response.Result);
+        }
+        return BadRequest();
+    }
+
+    //-------------------------------------------------------------------------------------------------------
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [HttpGet("totalRecordsPaginated")]
+    public async Task<IActionResult> GetPagesAsync([FromQuery] PaginationDTO pagination)
+    {
+        var action = await _usersUnitOfWork.GetTotalRecordsAsync(pagination);
+        if (action.WasSuccess)
+        {
+            return Ok(action.Result);
+        }
+        return BadRequest();
+    }
 }

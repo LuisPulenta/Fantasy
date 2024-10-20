@@ -7,6 +7,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\images\users\angelina.jpg" />
+    <Content Remove="wwwroot\images\users\batistuta.jpg" />
+    <Content Remove="wwwroot\images\users\bob.jpg" />
+    <Content Remove="wwwroot\images\users\brad.jpg" />
+    <Content Remove="wwwroot\images\users\celia.jpg" />
+    <Content Remove="wwwroot\images\users\federer.jpg" />
+    <Content Remove="wwwroot\images\users\fredy.jpg" />
+    <Content Remove="wwwroot\images\users\hector.jpg" />
+    <Content Remove="wwwroot\images\users\juanzuluaga.jpg" />
+    <Content Remove="wwwroot\images\users\kempes.jpg" />
+    <Content Remove="wwwroot\images\users\ledysbedoya.jpg" />
+    <Content Remove="wwwroot\images\users\liv.jpg" />
+    <Content Remove="wwwroot\images\users\luis.jpg" />
+    <Content Remove="wwwroot\images\users\maradona.jpg" />
+    <Content Remove="wwwroot\images\users\messi.jpg" />
+    <Content Remove="wwwroot\images\users\nadal.jpg" />
+    <Content Remove="wwwroot\images\users\otep.jpg" />
+    <Content Remove="wwwroot\images\users\ozzy.jpg" />
+    <Content Remove="wwwroot\images\users\pablo.jpg" />
+    <Content Remove="wwwroot\images\users\selena.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CurrieTechnologies.Razor.SweetAlert2" Version="5.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="8.0.8" />
@@ -23,8 +46,30 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\tournaments\" />
-    <Folder Include="wwwroot\images\users\" />
     <Folder Include="wwwroot\images\teams\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\users\angelina.jpg" />
+    <None Include="wwwroot\images\users\batistuta.jpg" />
+    <None Include="wwwroot\images\users\bob.jpg" />
+    <None Include="wwwroot\images\users\brad.jpg" />
+    <None Include="wwwroot\images\users\celia.jpg" />
+    <None Include="wwwroot\images\users\federer.jpg" />
+    <None Include="wwwroot\images\users\fredy.jpg" />
+    <None Include="wwwroot\images\users\hector.jpg" />
+    <None Include="wwwroot\images\users\juanzuluaga.jpg" />
+    <None Include="wwwroot\images\users\kempes.jpg" />
+    <None Include="wwwroot\images\users\ledysbedoya.jpg" />
+    <None Include="wwwroot\images\users\liv.jpg" />
+    <None Include="wwwroot\images\users\luis.jpg" />
+    <None Include="wwwroot\images\users\maradona.jpg" />
+    <None Include="wwwroot\images\users\messi.jpg" />
+    <None Include="wwwroot\images\users\nadal.jpg" />
+    <None Include="wwwroot\images\users\otep.jpg" />
+    <None Include="wwwroot\images\users\ozzy.jpg" />
+    <None Include="wwwroot\images\users\pablo.jpg" />
+    <None Include="wwwroot\images\users\selena.jpg" />
   </ItemGroup>
 
   <ItemGroup>

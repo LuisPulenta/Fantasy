@@ -1,5 +1,6 @@
 ﻿using Fantasy.Shared.DTOs;
 using Fantasy.Shared.Entities;
+using Fantasy.Shared.Responses;
 using Microsoft.AspNetCore.Identity;
 
 namespace Fantasy.Backend.UnitsOfWork.Interfaces;
@@ -33,5 +34,9 @@ public interface IUsersUnitOfWork
     Task<string> GeneratePasswordResetTokenAsync(User user);
 
     Task<IdentityResult> ResetPasswordAsync(User user, string token, string password);
+
+    Task<ActionResponse<IEnumerable<User>>> GetAsync(PaginationDTO pagination);
+
+    Task<ActionResponse<int>> GetTotalRecordsAsync(PaginationDTO pagination);
 
 }

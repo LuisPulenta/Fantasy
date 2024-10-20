@@ -626,4 +626,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\Users\" />
+  </ItemGroup>
+
 </Project>
