@@ -43,8 +43,8 @@ public class User : IdentityUser
 
     public ICollection<UserGroup>? GroupsBelong { get; set; }
 
-    public ICollection<Prediction>? Predictions { get; set; }
+    //public ICollection<Prediction>? Predictions { get; set; }
 
-    public int PredictionsCount => Predictions == null ? 0 : Predictions.Count;
+    //public int PredictionsCount => Predictions == null ? 0 : Predictions.Count;
 
 }

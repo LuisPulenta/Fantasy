@@ -42,29 +42,29 @@ public class AccountsController : ControllerBase
 
         //Foto
 
-        if (model.Photo != null)
-        {
-            byte[] imageArray = Convert.FromBase64String(model.Photo!);
-            var stream = new MemoryStream(imageArray);
-            var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.jpg";
-            var folder = "wwwroot\\images\\users";
-            var fullPath = $"~/images/users/{file}";
-            var response = _filesHelper.UploadPhoto(stream, folder, file);
+        //if (model.Photo != null)
+        //{
+        //    byte[] imageArray = Convert.FromBase64String(model.Photo!);
+        //    var stream = new MemoryStream(imageArray);
+        //    var guid = Guid.NewGuid().ToString();
+        //    var file = $"{guid}.jpg";
+        //    var folder = "wwwroot\\images\\users";
+        //    var fullPath = $"~/images/users/{file}";
+        //    var response = _filesHelper.UploadPhoto(stream, folder, file);
 
-            if (response)
-            {
-                user.Photo = fullPath;
-            }
-            else
-            {
-                user.Photo = string.Empty;
-            }
-        }
-        else
-        {
-            user.Photo = string.Empty;
-        }
+        //    if (response)
+        //    {
+        //        user.Photo = fullPath;
+        //    }
+        //    else
+        //    {
+        //        user.Photo = string.Empty;
+        //    }
+        //}
+        //else
+        //{
+        //    user.Photo = string.Empty;
+        //}
 
 
         var country = await _context.Countries.FindAsync(model.CountryId);

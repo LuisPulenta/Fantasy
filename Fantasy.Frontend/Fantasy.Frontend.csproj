@@ -45,6 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\images\groups\" />
     <Folder Include="wwwroot\images\tournaments\" />
     <Folder Include="wwwroot\images\teams\" />
   </ItemGroup>
