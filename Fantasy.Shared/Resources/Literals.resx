@@ -495,4 +495,7 @@
   <data name="ERR016" xml:space="preserve">
     <value>The prediction Id is not valid</value>
   </data>
+  <data name="Points" xml:space="preserve">
+    <value>Points</value>
+  </data>
 </root>
