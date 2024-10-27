@@ -498,4 +498,19 @@
   <data name="Points" xml:space="preserve">
     <value>Puntos</value>
   </data>
+  <data name="Members" xml:space="preserve">
+    <value>Miembros</value>
+  </data>
+  <data name="GroupDetails" xml:space="preserve">
+    <value>Detalles de Grupo</value>
+  </data>
+  <data name="JoinGroup" xml:space="preserve">
+    <value>Unirme a un grupo</value>
+  </data>
+  <data name="MyGroups" xml:space="preserve">
+    <value>Mis Grupos</value>
+  </data>
+  <data name="NoGroups" xml:space="preserve">
+    <value>No perteneces a ningún grupo. Puedes unirte a uno con la URL o el código compartido por el administrador del grupo, o bien, ver los grupos disponibles en la página de inicio y luego pedirle al administrador que te active para poder ingresar tus predicciones. También puedes crear tu propio grupo de amigos.</value>
+  </data>
 </root>

@@ -40,7 +40,10 @@ public class Group
 
     public ICollection<UserGroup>? Members { get; set; }
 
-    public string ImageFull => string.IsNullOrEmpty(Image) ? "/images/NoImage.png" : Image;
+    [Display(Name = "Imagen")]
+    public string ImageFull => string.IsNullOrEmpty(Image)
+? $"https://localhost:7033/images/noimage.png"
+: $"https://localhost:7033{Image[1..]}";
 
     public ICollection<Prediction>? Predictions { get; set; }
 

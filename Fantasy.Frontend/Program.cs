@@ -1,6 +1,7 @@
 using CurrieTechnologies.Razor.SweetAlert2;
 using Fantasy.Frontend;
 using Fantasy.Frontend.AuthenticationProviders;
+using Fantasy.Frontend.Helpers;
 using Fantasy.Frontend.Repositories;
 using Fantasy.Frontend.Services;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -22,6 +23,7 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationProviderJWT>();
 builder.Services.AddScoped<AuthenticationStateProvider, AuthenticationProviderJWT>(x => x.GetRequiredService<AuthenticationProviderJWT>());
 builder.Services.AddScoped<ILoginService, AuthenticationProviderJWT>(x => x.GetRequiredService<AuthenticationProviderJWT>());
+builder.Services.AddScoped<IClipboardService, ClipboardService>();
 
 
 

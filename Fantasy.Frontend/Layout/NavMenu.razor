@@ -17,10 +17,12 @@
             <MudDivider />
             <MudNavLink Href="/users" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.People">@Localizer["Users"]</MudNavLink>
             <MudDivider />
-
-
-            <MudDivider />
         </Authorized>
+    </AuthorizeView>
+    
+    <AuthorizeView>
+        <MudNavLink Href="/groups" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.SportsSoccer">@Localizer["MyGroups"]</MudNavLink>
+        <MudDivider />
     </AuthorizeView>
 
     <MudNavLink Href="/about" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Info">@Localizer["About"]</MudNavLink>
